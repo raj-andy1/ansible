@@ -1,0 +1,16 @@
+ - hosts: localhost
+   connection: local
+   gather_facts: False
+   
+   tasks:
+   #launch ec2 instance with credentials stored in ~/.boto
+   - name: launch ec2 instance
+     local_action:
+        module: ec2
+        image: ami-b6bdde86
+        instance_type: t1.micro
+        region: us-west-2
+        wait: yes
+    
+    - name: Add instance to local hosts file
+      local_action: 
