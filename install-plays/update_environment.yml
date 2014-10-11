@@ -1,0 +1,20 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:
+  
+   - name: Update enviroment for Python
+     lineinfile:
+        dest=/etc/environment
+        backup=yes
+        regexp="{{ item.regexp }}"
+        line="{{ item.line }}"
+        state=present
+        insertafter=EOF
+     with_items:
+        - { regexp: '^', line: 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH' }
+        - { regexp: '(.+)PATH=(.+)', line: 'export LD_LIBRARY_PATH=/usr/local/lib' }
+        - { regexp: '(.+)export (.+)', line: 'export PATH' }
+       
+    

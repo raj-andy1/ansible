@@ -1,0 +1,22 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:
+  
+  - name: install libse-linux-python
+    yum: name=libselinux-python state=present
+
+  - name: copy packages over
+    copy: src={{ item }} dest=/tmp/
+    with_items:
+    - /Users/andyr/Documents/ansible/Automation/packages/python/Python-2.7.6.tgz
+    
+  - name: Untar Python
+    unarchive: src=/tmp/Python-2.7.6.tgz dest=/tmp/ copy=no
+    
+  - name: Compile Python   
+    shell: ./configure --enable-shared --prefix=/usr/local chdir=/tmp/Python-2.7.6/
+  
+  - name: Run the make file
+    shell: make && make altinstall chdir=/tmp/Python-2.7.6/
