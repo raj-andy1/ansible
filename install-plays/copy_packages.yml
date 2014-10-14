@@ -1,0 +1,385 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:
+  
+  - name: install libse-linux-python
+    yum: name=libselinux-python state=present
+
+  - name: copy packages over
+    copy: src={{ item }} dest=/tmp/
+    with_items:
+    - /Users/andyr/Documents/ansible/Automation/packages/java/jdk-7u45-linux-x64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/cassandra/cassandra20-2.0.6-1.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/apr-1.3.9-5.el6_2.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/apr-devel-1.3.9-5.el6_2.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/apr-util-1.3.9-3.el6_0.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/apr-util-devel-1.3.9-3.el6_0.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/apr-util-ldap-1.3.9-3.el6_0.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/autoconf-2.63-5.1.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/automake-1.11.1-4.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/bison-2.4.1-5.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/byacc-1.9.20070509-7.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/bzip2-devel-1.0.5-7.el6_0.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/cloog-ppl-0.15.7-1.2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/cpp-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/cscope-15.6-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/ctags-5.8-2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/cvs-1.11.23-16.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/cyrus-sasl-devel-2.1.23-13.el6_3.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/db4-4.7.25-18.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/db4-cxx-4.7.25-18.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/db4-devel-4.7.25-18.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/db4-utils-4.7.25-18.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/diffstat-1.51-2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/doxygen-1.6.1-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/e2fsprogs-1.41.12-18.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/e2fsprogs-libs-1.41.12-18.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/epel-release-6-8.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-appmon-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-asn1-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-common_test-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-compiler-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosEventDomain-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosEvent-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosFileTransfer-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosNotification-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosProperty-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosTime-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-cosTransactions-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-crypto-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-debugger-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-dialyzer-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-diameter-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-docbuilder-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-edoc-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-erl_docgen-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-erl_interface-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-erts-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-et-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-eunit-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-examples-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-gs-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-hipe-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-ic-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-inets-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-inviso-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-jinterface-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-kernel-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-megaco-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-mnesia-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-observer-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-odbc-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-orber-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-os_mon-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-otp_mibs-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-parsetools-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-percept-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-pman-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-public_key-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-reltool-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-runtime_tools-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-sasl-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-snmp-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-ssh-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-ssl-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-stdlib-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-syntax_tools-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-test_server-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-toolbar-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-tools-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-tv-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-typer-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-webtool-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-wx-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/erlang-xmerl-R14B-04.3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/expat-devel-2.0.1-11.el6_2.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/flex-2.5.35-8.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/fontconfig-devel-2.8.0-3.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/freetype-devel-2.3.11-14.el6_3.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/gcc-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/gcc-c++-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/gcc-gfortran-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/gettext-devel-0.17-16.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/gettext-libs-0.17-16.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/glibc-2.12-1.132.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/glibc-common-2.12-1.132.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/glibc-devel-2.12-1.132.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/glibc-headers-2.12-1.132.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/httpd-2.2.15-29.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/httpd-devel-2.2.15-29.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/httpd-tools-2.2.15-29.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/indent-2.2.10-7.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/intltool-0.41.0-1.1.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/jicmp-1.4.1-1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/jicmp6-1.2.1-1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/kernel-devel-2.6.32-431.11.2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/kernel-headers-2.6.32-431.11.2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/keyutils-libs-devel-1.4-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/krb5-devel-1.10.3-10.el6_4.6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/krb5-libs-1.10.3-10.el6_4.6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/krb5-workstation-1.10.3-10.el6_4.6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libart_lgpl-2.3.20-5.1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libcom_err-1.41.12-18.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libcom_err-devel-1.41.12-18.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libgcc-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libgcj-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libgfortran-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libgomp-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libselinux-devel-2.0.94-5.3.el6_4.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libsepol-devel-2.0.41-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libss-1.41.12-18.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libstdc++-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libstdc++-devel-4.4.7-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libtool-2.2.6-15.5.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libtool-ltdl-2.2.6-15.5.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libX11-devel-1.5.0-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libXau-devel-1.0.6-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libxcb-devel-1.8.1-1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libXft-devel-2.3.1-2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/libXrender-devel-0.9.7-2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/mpfr-2.4.1-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/ncurses-devel-5.7-3.20090208.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/neon-0.29.3-3.el6_4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/openldap-2.4.23-34.el6_5.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/openldap-devel-2.4.23-34.el6_5.1.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/openssl-1.0.1e-16.el6_5.4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/openssl-devel-1.0.1e-16.el6_5.4.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/pakchois-0.4-3.2.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/patchutils-0.3.1-3.1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/perl-Error-0.17015-4.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/ppl-0.10.2-11.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/rcs-5.7-37.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/readline-devel-6.0-4.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/redhat-rpm-config-9.0.3-42.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/rpm-4.8.0-37.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/rpm-build-4.8.0-37.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/rpm-libs-4.8.0-37.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/rpm-python-4.8.0-37.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/subversion-1.6.11-10.el6_5.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/swig-1.3.40-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/systemtap-2.3-4.el6_5.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/systemtap-client-2.3-4.el6_5.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/systemtap-devel-2.3-4.el6_5.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/systemtap-runtime-2.3-4.el6_5.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/tcl-8.5.7-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/tcl-devel-8.5.7-6.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/tk-8.5.7-5.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/tk-devel-8.5.7-5.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/unixODBC-2.2.14-12.el6_3.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/wxBase-2.8.12-1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/wxGTK-2.8.12-1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/wxGTK-gl-2.8.12-1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/xorg-x11-proto-devel-7.6-25.el6.noarch.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/zlib-devel-1.2.3-29.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/dependencies/sqlite-devel-3.6.20-1.el6.x86_64.rpm
+    - /Users/andyr/Documents/ansible/Automation/packages/python/Python-2.7.6.tgz
+    - /Users/andyr/Documents/ansible/Automation/packages/python/virtualenv-1.11.4.tar.gz
+ 
+  - name: install packages
+    yum: name={{ item }} state=present
+    with_items:
+    - /tmp/jdk-7u45-linux-x64.rpm
+    - /tmp/cassandra20-2.0.6-1.noarch.rpm
+    - /tmp/openldap-devel-2.4.23-34.el6_5.1.x86_64.rpm
+    - /tmp/expat-devel-2.0.1-11.el6_2.x86_64.rpm
+    - /tmp/cyrus-sasl-devel-2.1.23-13.el6_3.1.x86_64.rpm
+    - /tmp/libart_lgpl-2.3.20-5.1.el6.x86_64.rpm
+    - /tmp/libcom_err-1.41.12-18.el6.x86_64.rpm
+    - /tmp/libcom_err-devel-1.41.12-18.el6.x86_64.rpm
+    - /tmp/libgcc-4.4.7-4.el6.x86_64.rpm
+    - /tmp/libgfortran-4.4.7-4.el6.x86_64.rpm
+    - /tmp/libgomp-4.4.7-4.el6.x86_64.rpm
+    - /tmp/libselinux-devel-2.0.94-5.3.el6_4.1.x86_64.rpm
+    - /tmp/libsepol-devel-2.0.41-4.el6.x86_64.rpm
+    - /tmp/libss-1.41.12-18.el6.x86_64.rpm
+    - /tmp/libstdc++-4.4.7-4.el6.x86_64.rpm
+    - /tmp/libstdc++-devel-4.4.7-4.el6.x86_64.rpm
+    - /tmp/libtool-2.2.6-15.5.el6.x86_64.rpm
+    - /tmp/libtool-ltdl-2.2.6-15.5.el6.x86_64.rpm
+    - /tmp/libX11-devel-1.5.0-4.el6.x86_64.rpm
+    - /tmp/libXau-devel-1.0.6-4.el6.x86_64.rpm
+    - /tmp/libxcb-devel-1.8.1-1.el6.x86_64.rpm
+    - /tmp/libXft-devel-2.3.1-2.el6.x86_64.rpm
+    - /tmp/libXrender-devel-0.9.7-2.el6.x86_64.rpm
+    - /tmp/apr-1.3.9-5.el6_2.x86_64.rpm
+    - /tmp/apr-devel-1.3.9-5.el6_2.x86_64.rpm
+    - /tmp/apr-util-1.3.9-3.el6_0.1.x86_64.rpm
+    - /tmp/apr-util-devel-1.3.9-3.el6_0.1.x86_64.rpm
+    - /tmp/apr-util-ldap-1.3.9-3.el6_0.1.x86_64.rpm
+    - /tmp/autoconf-2.63-5.1.el6.noarch.rpm
+    - /tmp/automake-1.11.1-4.el6.noarch.rpm
+    - /tmp/bison-2.4.1-5.el6.x86_64.rpm
+    - /tmp/byacc-1.9.20070509-7.el6.x86_64.rpm
+    - /tmp/bzip2-devel-1.0.5-7.el6_0.x86_64.rpm
+    - /tmp/ppl-0.10.2-11.el6.x86_64.rpm
+    - /tmp/cloog-ppl-0.15.7-1.2.el6.x86_64.rpm
+    - /tmp/cpp-4.4.7-4.el6.x86_64.rpm
+    - /tmp/cscope-15.6-6.el6.x86_64.rpm
+    - /tmp/ctags-5.8-2.el6.x86_64.rpm
+    - /tmp/cvs-1.11.23-16.el6.x86_64.rpm
+    - /tmp/db4-4.7.25-18.el6_4.x86_64.rpm
+    - /tmp/db4-cxx-4.7.25-18.el6_4.x86_64.rpm
+    - /tmp/db4-devel-4.7.25-18.el6_4.x86_64.rpm
+    - /tmp/db4-utils-4.7.25-18.el6_4.x86_64.rpm
+    - /tmp/diffstat-1.51-2.el6.x86_64.rpm
+    - /tmp/doxygen-1.6.1-6.el6.x86_64.rpm
+    - /tmp/e2fsprogs-1.41.12-18.el6.x86_64.rpm
+    - /tmp/e2fsprogs-libs-1.41.12-18.el6.x86_64.rpm
+    - /tmp/epel-release-6-8.noarch.rpm
+    - /tmp/erlang-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-kernel-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-appmon-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-asn1-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-common_test-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-compiler-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosEventDomain-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosEvent-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosFileTransfer-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosNotification-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosProperty-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosTime-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-cosTransactions-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-crypto-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-debugger-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-dialyzer-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-diameter-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-docbuilder-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-edoc-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-erl_docgen-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-erl_interface-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-erts-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-et-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-eunit-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-examples-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-gs-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-hipe-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-ic-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-inets-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-inviso-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-jinterface-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-megaco-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-mnesia-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-observer-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-odbc-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-orber-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-os_mon-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-otp_mibs-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-parsetools-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-percept-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-pman-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-public_key-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-reltool-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-runtime_tools-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-sasl-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-stdlib-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-snmp-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-ssh-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-ssl-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-syntax_tools-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-toolbar-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-tools-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-test_server-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-tv-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-typer-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-webtool-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-wx-R14B-04.3.el6.x86_64.rpm
+    - /tmp/erlang-xmerl-R14B-04.3.el6.x86_64.rpm
+    - /tmp/flex-2.5.35-8.el6.x86_64.rpm
+    - /tmp/fontconfig-devel-2.8.0-3.el6.x86_64.rpm
+    - /tmp/freetype-devel-2.3.11-14.el6_3.1.x86_64.rpm
+    - /tmp/gcc-4.4.7-4.el6.x86_64.rpm
+    - /tmp/gcc-c++-4.4.7-4.el6.x86_64.rpm
+    - /tmp/gcc-gfortran-4.4.7-4.el6.x86_64.rpm
+    - /tmp/gettext-devel-0.17-16.el6.x86_64.rpm
+    - /tmp/gettext-libs-0.17-16.el6.x86_64.rpm
+    - /tmp/glibc-2.12-1.132.el6.x86_64.rpm
+    - /tmp/glibc-common-2.12-1.132.el6.x86_64.rpm
+    - /tmp/glibc-devel-2.12-1.132.el6.x86_64.rpm
+    - /tmp/glibc-headers-2.12-1.132.el6.x86_64.rpm
+    - /tmp/httpd-tools-2.2.15-29.el6_4.x86_64.rpm
+    - /tmp/httpd-2.2.15-29.el6_4.x86_64.rpm
+    - /tmp/httpd-devel-2.2.15-29.el6_4.x86_64.rpm
+    - /tmp/indent-2.2.10-7.el6.x86_64.rpm
+    - /tmp/intltool-0.41.0-1.1.el6.noarch.rpm
+    - /tmp/jicmp-1.4.1-1.x86_64.rpm
+    - /tmp/jicmp6-1.2.1-1.x86_64.rpm
+    - /tmp/kernel-devel-2.6.32-431.11.2.el6.x86_64.rpm
+    - /tmp/kernel-headers-2.6.32-431.11.2.el6.x86_64.rpm
+    - /tmp/keyutils-libs-devel-1.4-4.el6.x86_64.rpm
+    - /tmp/krb5-devel-1.10.3-10.el6_4.6.x86_64.rpm
+    - /tmp/krb5-libs-1.10.3-10.el6_4.6.x86_64.rpm
+    - /tmp/krb5-workstation-1.10.3-10.el6_4.6.x86_64.rpm
+    - /tmp/mpfr-2.4.1-6.el6.x86_64.rpm
+    - /tmp/ncurses-devel-5.7-3.20090208.el6.x86_64.rpm
+    - /tmp/neon-0.29.3-3.el6_4.x86_64.rpm
+    - /tmp/openldap-2.4.23-34.el6_5.1.x86_64.rpm
+    - /tmp/openssl-1.0.1e-16.el6_5.4.x86_64.rpm
+    - /tmp/openssl-devel-1.0.1e-16.el6_5.4.x86_64.rpm
+    - /tmp/pakchois-0.4-3.2.el6.x86_64.rpm
+    - /tmp/patchutils-0.3.1-3.1.el6.x86_64.rpm
+    - /tmp/perl-Error-0.17015-4.el6.noarch.rpm
+    - /tmp/rcs-5.7-37.el6.x86_64.rpm
+    - /tmp/readline-devel-6.0-4.el6.x86_64.rpm
+    - /tmp/redhat-rpm-config-9.0.3-42.el6.noarch.rpm
+    - /tmp/rpm-4.8.0-37.el6.x86_64.rpm
+    - /tmp/rpm-build-4.8.0-37.el6.x86_64.rpm
+    - /tmp/rpm-libs-4.8.0-37.el6.x86_64.rpm
+    - /tmp/rpm-python-4.8.0-37.el6.x86_64.rpm
+    - /tmp/subversion-1.6.11-10.el6_5.x86_64.rpm
+    - /tmp/swig-1.3.40-6.el6.x86_64.rpm
+    - /tmp/systemtap-2.3-4.el6_5.x86_64.rpm
+    - /tmp/systemtap-client-2.3-4.el6_5.x86_64.rpm
+    - /tmp/systemtap-devel-2.3-4.el6_5.x86_64.rpm
+    - /tmp/systemtap-runtime-2.3-4.el6_5.x86_64.rpm
+    - /tmp/tcl-8.5.7-6.el6.x86_64.rpm
+    - /tmp/tcl-devel-8.5.7-6.el6.x86_64.rpm
+    - /tmp/tk-8.5.7-5.el6.x86_64.rpm
+    - /tmp/tk-devel-8.5.7-5.el6.x86_64.rpm
+    - /tmp/unixODBC-2.2.14-12.el6_3.x86_64.rpm
+    - /tmp/wxBase-2.8.12-1.el6.x86_64.rpm
+    - /tmp/wxGTK-2.8.12-1.el6.x86_64.rpm
+    - /tmp/wxGTK-gl-2.8.12-1.el6.x86_64.rpm
+    - /tmp/xorg-x11-proto-devel-7.6-25.el6.noarch.rpm
+    - /tmp/zlib-devel-1.2.3-29.el6.x86_64.rpm
+    - /tmp/sqlite-devel-3.6.20-1.el6.x86_64.rpm
+    
+  - name: change system java version
+    command: alternatives --install "/usr/bin/java" "java" "/usr/java/jdk1.7.0_45/jre/bin/java" "200000"
+  
+  - name: Untar Python
+    unarchive: src=/tmp/Python-2.7.6.tgz dest=/tmp/ copy=no
+    
+  - name: Compile Python   
+    shell: ./configure --enable-shared --prefix=/usr/local chdir=/tmp/Python-2.7.6/
+  
+  - name: Run the make file
+    shell: make && make altinstall chdir=/tmp/Python-2.7.6/
+
+  - name: Update enviroment for Python
+    lineinfile: dest=/etc/environment backup=yes
+        regexp="{{ item.regexp }}"
+        line="{{ item.line }}"
+        state=present
+    with_items:
+        - { regexp: '^', line: 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH' }
+        - { regexp: '(.+)PATH=(.+)', line: 'export LD_LIBRARY_PATH=/usr/local/lib' }
+        - { regexp: '(.+)export (.+)', line: 'export PATH' }
+    
+   - name: Add a group
+     user: name=fixstream state=present
+   
+   - name: Add a user
+     user: name=fixstream group=fixstream password=$6$rounds=100000$/QDoCyY55qVOW2EK$L1wzOtc9Q.wn5QIvT4rV.E02nnEWWzikgV2VDuzYf6CnSu0EekMlsekotBkVkd9Vw7sn1dDWc5STr1.fMQKhj.
+   #http://stackoverflow.com/questions/15231661/how-do-i-create-a-user-and-set-a-password-using-ansible
+   
+   - name: Add 'fixstream' user to sudoers file
+     lineinfile: dest=/etc/sudoers backup=yes
+        insertafter="root(.+)ALL(.+)"
+        line="fixstream ALL=(ALL)   ALL"
+        state=present  
+    
+  - name: delete installed packages
+    shell: rm -rf * chdir=/tmp/

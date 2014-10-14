@@ -1,0 +1,18 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:  
+   
+   - name: Add a group
+     user: name=fixstream state=present
+   
+   - name: Add a user
+     user: name=fixstream group=fixstream password=$6$rounds=100000$/QDoCyY55qVOW2EK$L1wzOtc9Q.wn5QIvT4rV.E02nnEWWzikgV2VDuzYf6CnSu0EekMlsekotBkVkd9Vw7sn1dDWc5STr1.fMQKhj.
+   #http://stackoverflow.com/questions/15231661/how-do-i-create-a-user-and-set-a-password-using-ansible
+   
+   - name: Add 'fixstream' user to sudoers file
+     lineinfile: dest=/etc/sudoers backup=yes
+        insertafter="root(.+)ALL(.+)"
+        line="fixstream ALL=(ALL)   ALL"
+        state=present
