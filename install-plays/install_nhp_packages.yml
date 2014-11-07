@@ -176,6 +176,7 @@
     - /Users/andyr/Documents/ansible/Automation/packages/dependencies/zlib-devel-1.2.3-29.el6.x86_64.rpm
     - /Users/andyr/Documents/ansible/Automation/packages/dependencies/sqlite-devel-3.6.20-1.el6.x86_64.rpm
     - /Users/andyr/Documents/ansible/Automation/packages/python/Python-2.7.6.tgz
+    - /Users/andyr/Documents/ansible/Automation/packages/python/virtualenv-1.11.4.tar.gz
  
   - name: install packages
     yum: name={{ item }} state=present
@@ -366,6 +367,34 @@
         - { regexp: '^', line: 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH' }
         - { regexp: '(.+)PATH=(.+)', line: 'export LD_LIBRARY_PATH=/usr/local/lib' }
         - { regexp: '(.+)export (.+)', line: 'export PATH' }
+        
+  - name: Update cassandra configuration file with correct seed IP address
+    replace: dest=/etc/cassandra/conf/cassandra.yaml backup=yes
+        regexp='"127(.+)'
+        replace='"{{ ansible_eth0.ipv4.address }}"'
+    
+  - name: Update cassandra configuration file with correct RPC address
+    lineinfile: "dest=/etc/cassandra/conf/cassandra.yaml backup=yes
+        regexp='rpc_address: localhost'
+        line='rpc_address: 0.0.0.0'"
+    
+  - name: Update hosts file with the correct hostname, IP address
+    replace: dest=/etc/hosts backup=yes
+        regexp='localhost.+'
+        replace='{{ ansible_hostname }} localhost {{ ansible_fqdn }} localhost.localdomain'
+        
+   - name: Add a group
+     user: name=fixstream state=present
+   
+   - name: Add a user
+     user: name=fixstream group=fixstream password=$6$rounds=100000$/QDoCyY55qVOW2EK$L1wzOtc9Q.wn5QIvT4rV.E02nnEWWzikgV2VDuzYf6CnSu0EekMlsekotBkVkd9Vw7sn1dDWc5STr1.fMQKhj.
+   #http://stackoverflow.com/questions/15231661/how-do-i-create-a-user-and-set-a-password-using-ansible
+   
+   - name: Add 'fixstream' user to sudoers file
+     lineinfile: dest=/etc/sudoers backup=yes
+        insertafter="root(.+)ALL(.+)"
+        line="fixstream ALL=(ALL)   ALL"
+        state=present  
     
   - name: delete installed packages
     shell: rm -rf * chdir=/tmp/

@@ -1,0 +1,8 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:
+  
+- name: delete installed packages
+  shell: rm -rf chdir=/tmp/

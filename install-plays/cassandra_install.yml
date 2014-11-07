@@ -1,0 +1,24 @@
+---
+
+- hosts: centos65
+  remote_user: root
+  tasks:
+  
+  - name: Update cassandra configuration file with correct seed IP address
+    replace: dest=/etc/cassandra/conf/cassandra.yaml backup=yes
+        regexp='"127(.+)'
+        replace='"{{ ansible_eth0.ipv4.address }}"'
+    
+  - name: Update cassandra configuration file with correct RPC address
+    lineinfile: "dest=/etc/cassandra/conf/cassandra.yaml backup=yes
+        regexp='rpc_address: localhost'
+        line='rpc_address: 0.0.0.0'"
+        
+  - name: Update hosts file with the correct hostname, IP address
+    replace: dest=/etc/hosts backup=yes
+        regexp='localhost.+'
+        replace='{{ ansible_hostname }} localhost {{ ansible_fqdn }} localhost.localdomain'
+  
+  - name: start the cassandra service
+    service: name=cassandra state=started
+ 
